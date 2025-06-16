@@ -118,7 +118,8 @@ export class FormDialogComponent {
       insepctionID: [0],
       branchID: ['', [Validators.required]],
       departmentID: ['', [Validators.required]],
-      files: [null,[Validators.required]]
+      files: [null, [Validators.required]],
+      isActive: [true]
     });
   }
   submit() {
@@ -156,34 +157,52 @@ export class FormDialogComponent {
       return;
     }
     else {
-      this.departmentService.SaveDepartment(this.inspectionForm.value).subscribe(res => {
-        if (res) {
-          if (res.statusCode == 0) {
-            this.showNotification(
-              'snackbar-success',
-              'Record has been saved successfully.',
-              'top',
-              'center'
-            );
-          }
-          else {
-            this.showNotification(
-              'snackbar-success',
-              res.message,
-              'top',
-              'center'
-            );
-          }
-        }
-        else {
-          this.showNotification(
-            'snackbar-danger',
-            'Server error, Please try again after some time."',
-            'top',
-            'center'
-          );
-        }
-      });
+      try {
+        const formData = { ...this.inspectionForm.value, files: null };
+        localStorage.setItem('inspectionForm', JSON.stringify(formData));
+        this.showNotification(
+          'snackbar-success',
+          'Record has been saved successfully.',
+          'top',
+          'center'
+        );
+      } catch (error) {
+        this.showNotification(
+          'snackbar-danger',
+          'Server error, Please try again after some time."',
+          'top',
+          'center'
+        );
+      }
+
+      // this.departmentService.SaveDepartment(this.inspectionForm.value).subscribe(res => {
+      //   if (res) {
+      //     if (res.statusCode == 0) {
+      //       this.showNotification(
+      //         'snackbar-success',
+      //         'Record has been saved successfully.',
+      //         'top',
+      //         'center'
+      //       );
+      //     }
+      //     else {
+      //       this.showNotification(
+      //         'snackbar-success',
+      //         res.message,
+      //         'top',
+      //         'center'
+      //       );
+      //     }
+      //   }
+      //   else {
+      //     this.showNotification(
+      //       'snackbar-danger',
+      //       'Server error, Please try again after some time."',
+      //       'top',
+      //       'center'
+      //     );
+      //   }
+      // });
     }
   }
 }

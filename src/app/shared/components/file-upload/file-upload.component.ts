@@ -22,14 +22,23 @@ export class FileUploadComponent implements ControlValueAccessor {
   onChange!: Function;
   public file: File | null = null;
 
-  @HostListener('change', ['$event.target.files']) emitFiles(event: FileList) {
-    const file = event && event.item(0);
-    this.onChange(file);
-    this.file = file;
-  }
+  // @HostListener('change', ['$event.target.files']) emitFiles(event: FileList) {
+  //   const file = event && event.item(0);
+  //   this.onChange(file);
+  //   this.file = file;
+  // }
 
   constructor(private host: ElementRef<HTMLInputElement>) { }
+  emitFiles(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const fileList = input.files;
 
+    if (fileList && fileList.length > 0) {
+      const file = fileList[0];
+      this.onChange(file);
+      this.file = file;
+    }
+  }
   writeValue(value: null) {
     // clear file input
     this.host.nativeElement.value = '';

@@ -71,7 +71,7 @@ export class InspectionListView
     'actions',
   ];
   lstData: any = [];
-  dataSourceDepartment = new MatTableDataSource<any>(this.lstData);
+  dataSourceInspection = new MatTableDataSource<any>(this.lstData);
 
   breadscrums = [
     {
@@ -178,12 +178,15 @@ export class InspectionListView
 
   public loadData() {
     debugger;
-    
+    const storedData = localStorage.getItem('inspectionForm');
+    const formData = storedData ? [JSON.parse(storedData)] : [];
+    console.log("dtaa -- ", formData)
+    this.dataSourceInspection = new MatTableDataSource<any>(formData)
     // this.departmentService.GetAllDepartment().subscribe(res => {
     //   console.log(res.data);
     //   this.lstData = res.data
-    //   this.dataSourceDepartment = new MatTableDataSource<any>(res.data);
-    //   this.dataSourceDepartment.paginator = this.paginator;
+    //   this.dataSourceInspection = new MatTableDataSource<any>(res.data);
+    //   this.dataSourceInspection.paginator = this.paginator;
     // });
   }
 

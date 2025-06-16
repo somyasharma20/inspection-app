@@ -1,5 +1,5 @@
 <div class="file-drop-area">
-  <button mat-raised-button color="primary" (click)="fileUpload">Choose file</button>
+  <button mat-raised-button color="primary" (click)="fileUpload()">Choose file</button>
   <span>{{file ? file.name : ' or drag and drop file here' }}</span>
-  <input #fileInput class="file-input" type="file">
+  <input #fileInput class="file-input" type="file" (change)="emitFiles($event)">
 </div>

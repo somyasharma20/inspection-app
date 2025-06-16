@@ -57,16 +57,16 @@
           </div>
           <div class="body overflow-auto">
             <div class="responsive_table">
-              <table mat-table [dataSource]="dataSourceDepartment" class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSourceInspection" class="mat-elevation-z8">
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
                   <th mat-header-cell *matHeaderCellDef> Inspection Id </th>
-                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.insepctionID}} </td>
                 </ng-container>
                 <!-- Description Column -->
                 <ng-container matColumnDef="description">
                   <th mat-header-cell *matHeaderCellDef> Centre </th>
-                  <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.branchID}} </td>
                 </ng-container>
                 <!-- Active Column -->
                 <ng-container matColumnDef="isActive">
@@ -94,7 +94,7 @@
               </table>
 
 
-              <div *ngIf="dataSourceDepartment.filteredData.length === 0">No records found
+              <div *ngIf="dataSourceInspection.filteredData.length === 0">No records found
               </div>
               <mat-paginator [pageSize]="10" [pageSizeOptions]="[10,20,30,50,100]" showFirstLastButtons>
               </mat-paginator>
