@@ -1,0 +1,128 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modal-about">
+          {{dialogTitle}}
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" class="modal-close-button" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="employeeForm" (ngSubmit)="submit">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" required>
+            <!-- <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon> -->
+            @if (employeeForm.get('firstName')?.hasError('required')) {
+            <mat-error>
+              First Name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" required>
+            <!-- <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon> -->
+            @if (employeeForm.get('lastName')?.hasError('required')) {
+            <mat-error>
+              Last Name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Select Branch</mat-label>
+            <mat-select formControlName="branchID" required (selectionChange)="fillDepartment($event.value)">
+              @for (item of lstBranch; track item) {
+                <mat-option [value]="item.branchID">{{item.name}}</mat-option>
+              }
+            </mat-select>
+            @if (employeeForm.get('branchID')?.hasError('required')) {
+            <mat-error>
+              Select Any Branch
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Select Department</mat-label>
+            <mat-select formControlName="departmentID" required>
+              @for (item of lstDepartment; track item) {
+                <mat-option [value]="item.departmentID">{{item.name}}</mat-option>
+              }
+            </mat-select>
+            @if (employeeForm.get('departmentID')?.hasError('required')) {
+            <mat-error>
+              Select Any Department
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Code</mat-label>
+            <input matInput formControlName="code" required>
+            <!-- <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon> -->
+            @if (employeeForm.get('code')?.hasError('required')) {
+            <mat-error>
+              Code is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Grade</mat-label>
+            <input matInput formControlName="grade" required>
+            <!-- <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon> -->
+            @if (employeeForm.get('grade')?.hasError('required')) {
+            <mat-error>
+              Grade is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Work Description</mat-label>
+            <textarea matInput formControlName="workDescription"></textarea>
+            <!-- <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon> -->
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+            <mat-checkbox formControlName="isActive">Active</mat-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" [disabled]="!employeeForm.valid" [mat-dialog-close]="1"
+              (click)="confirmAdd()">Save</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

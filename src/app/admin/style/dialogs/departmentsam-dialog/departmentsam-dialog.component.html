@@ -1,0 +1,65 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!-- <img [src]='teachers.img' alt="avatar"> -->
+        <div class="modal-about">
+          {{dialogTitle}}
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" class="modal-close-button" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="styleForm" (ngSubmit)="(submit)">
+      <div class="row">
+        <!-- <b>SAM Details</b> -->
+        <ng-container formArrayName="sams">
+          <mat-table [dataSource]="sams.controls">
+            <!-- departmentID Column -->
+            <!-- <ng-container matColumnDef="departmentID"  >
+                  <mat-header-cell *matHeaderCellDef>
+                    departmentID
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    {{ element.get("departmentID").value }}.
+                  </mat-cell>
+                </ng-container> -->
+
+            <!-- name Column -->
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef> Sections </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                {{ element.get("name").value }}
+              </mat-cell>
+            </ng-container>
+
+            <!-- sam Column -->
+            <ng-container matColumnDef="sam">
+              <mat-header-cell *matHeaderCellDef> SAM </mat-header-cell>
+              <mat-cell *matCellDef="let element" [formGroup]="element">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <input matInput type="number" formControlName="sam" placeholder="sam value" style="width: 80px"
+                    maxlength="5" />
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>
+        </ng-container>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" [mat-dialog-close]="1" (click)="saveDepartmentSam()">Save</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

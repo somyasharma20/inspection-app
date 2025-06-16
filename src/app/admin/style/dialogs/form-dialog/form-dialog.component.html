@@ -1,0 +1,150 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!-- <img [src]='teachers.img' alt="avatar"> -->
+        <div class="modal-about">
+          {{ dialogTitle }}
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" class="modal-close-button" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="styleForm" (ngSubmit)="(submit)">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Customer</mat-label>
+            <mat-select formControlName="customerID" required>
+              @for (cust of lstCustomer; track cust) {
+              <mat-option [value]="cust?.customerID">{{
+                cust?.name
+                }}</mat-option>
+              }
+            </mat-select>
+            @if (styleForm.get('customerID')?.hasError('required')) {
+            <mat-error> Required </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="categoryID" required>
+              @for (cat of lstCategory; track cat) {
+              <mat-option [value]="cat?.categoryID">{{ cat?.name }}</mat-option>
+              }
+            </mat-select>
+
+            @if (styleForm.get('categoryID')?.hasError('required')) {
+            <mat-error> Required </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Branch</mat-label>
+            <mat-select formControlName="branchID" required>
+              @for (branch of lstBranch; track branch) {
+              <mat-option [value]="branch?.branchID">{{ branch?.name }}</mat-option>
+              }
+            </mat-select>
+
+            @if (styleForm.get('branchID')?.hasError('required')) {
+            <mat-error> Required </mat-error>
+            }
+          </mat-form-field>
+        </div> -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Code</mat-label>
+            <input matInput formControlName="code" required />
+
+            @if (styleForm.get('code')?.hasError('required')) {
+            <mat-error>Required </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Production Cost (INR)</mat-label>
+            <input matInput formControlName="productionCost" required />
+            @if (styleForm.get('productionCost')?.hasError('required')) {
+            <mat-error>Required </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <!--  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Price ({{currencyCode}})</mat-label>
+            <input matInput formControlName="price" required />
+
+            @if (styleForm.get('price')?.hasError('required')) {
+            <mat-error>Required </mat-error>
+            }
+          </mat-form-field>
+        </div>-->
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description" />
+            <!-- @if (styleForm.get('description')?.hasError('required')) {
+            <mat-error> Work Description is required </mat-error>
+            } -->
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-checkbox formControlName="isActive">Active</mat-checkbox>
+        </div>
+      </div>
+      <!-- <div class="row">
+
+
+      </div> -->
+      <!-- <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
+          <label>Upload</label>
+          <app-file-upload formControlName="imageFile"></app-file-upload>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <input type="file" formControlName="imageFile" (change)="ImageUpload($event)" />
+
+          @if (styleForm.get('imageFile')?.hasError('required')) {
+          <mat-error> Required </mat-error>
+          }
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <img [src]="previewImagePathUrl" class="style-image" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" [disabled]="!styleForm.valid" [mat-dialog-close]="1"
+              (click)="confirmAdd()">
+              Save
+            </button>
+
+            <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

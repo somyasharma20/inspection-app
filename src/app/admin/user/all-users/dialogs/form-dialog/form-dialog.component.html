@@ -1,0 +1,154 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modal-about">
+          {{dialogTitle}}
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" class="modal-close-button" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="userForm" (ngSubmit)="submit">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" required>
+            <!-- <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon> -->
+            @if (userForm.get('firstName')?.hasError('required')) {
+            <mat-error>
+              First Name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" required>
+            <!-- <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon> -->
+            @if (userForm.get('lastName')?.hasError('required')) {
+            <mat-error>
+              Last Name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Select Team</mat-label>
+            <mat-select formControlName="teamID" required>
+              @for (item of lstTeam; track item) {
+              <mat-option [value]="item.teamID">{{item.name}}</mat-option>
+              }
+            </mat-select>
+            @if (userForm.get('teamID')?.hasError('required')) {
+            <mat-error>
+              Select Any Team
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Select Type</mat-label>
+            <mat-select formControlName="userTypeID" required>
+              <mat-option [value]='1'>
+                Admin
+              </mat-option>
+              <mat-option [value]='2'>
+                Secretary / President
+              </mat-option>
+              <mat-option [value]='3'>
+                Area Inspector
+              </mat-option>
+              <mat-option [value]='4'>
+                Member /Functionary
+              </mat-option>
+
+            </mat-select>
+            @if (userForm.get('userTypeID')?.hasError('required')) {
+            <mat-error>
+              Select Any Type
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required type="email" />
+            <!-- <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon> -->
+            @if (userForm.get('email')?.hasError('email') &&
+            userForm.get('email')?.touched) {
+            <mat-error> Please enter a valid email address </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Mobile No</mat-label>
+            <input matInput formControlName="mobileNo" required maxlength="10" />
+            @if (userForm.get('mobileNo')?.hasError('required')) {
+            <mat-error> Mobile No is required </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Login ID</mat-label>
+            <input matInput formControlName="loginID" required>
+            <!-- <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon> -->
+            @if (userForm.get('loginID')?.hasError('required')) {
+            <mat-error>
+              Login ID is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      @if (this.action != 'edit') {
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" required>
+            <!-- <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon> -->
+            @if (userForm.get('password')?.hasError('required')) {
+            <mat-error>
+              Password is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      }
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+            <mat-checkbox formControlName="isActive">Active</mat-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" [disabled]="!userForm.valid" [mat-dialog-close]="1"
+              (click)="confirmAdd()">Save</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,127 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!-- <img [src]='teachers.img' alt="avatar"> -->
+        <div class="modal-about">
+          {{ dialogTitle }}
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" class="modal-close-button" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+
+    <form class="register-form m-4" [formGroup]="customerForm" (ngSubmit)="(submit)">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" required />
+            @if (customerForm.get('name')?.hasError('required')) {
+            <mat-error> Required </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Code</mat-label>
+            <input matInput formControlName="code" required />
+
+            @if (customerForm.get('code')?.hasError('required')) {
+            <mat-error>Required </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Currency</mat-label>
+            <input matInput formControlName="currency" required />
+
+            @if (customerForm.get('currency')?.hasError('required')) {
+            <mat-error>Required </mat-error>
+            }
+          </mat-form-field>
+        </div> -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Country</mat-label>
+            <input matInput formControlName="country" required />
+            @if (customerForm.get('country')?.hasError('required')) {
+            <mat-error>Required </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Currency</mat-label>
+            <mat-select formControlName="currencyID" required>
+              @for (currency of lstCurrency; track currency) {
+              <mat-option [value]="currency?.currencyID">{{ currency?.currencyCode }}</mat-option>
+              }
+            </mat-select>
+
+            @if (customerForm.get('currencyID')?.hasError('required')) {
+            <mat-error> Required </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description" />
+            <!-- @if (customerForm.get('description')?.hasError('required')) {
+            <mat-error> Work Description is required </mat-error>
+            } -->
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Select Team</mat-label>
+            <mat-select formControlName="teamID" required>
+              @for (item of lstTeam; track item) {
+              <mat-option [value]="item.teamID">{{item.name}}</mat-option>
+              }
+            </mat-select>
+            @if (customerForm.get('teamID')?.hasError('required')) {
+            <mat-error>
+              Select Any Team
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- WorkDescription -->
+      <div class="row">
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+            <mat-checkbox formControlName="isActive">Active</mat-checkbox>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" [disabled]="!customerForm.valid" [mat-dialog-close]="1"
+              (click)="confirmAdd()">
+              Save
+            </button>
+
+            <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

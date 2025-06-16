@@ -1,0 +1,80 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <!-- <img [src]='teachers.img' alt="avatar"> -->
+        <div class="modal-about">
+          {{ dialogTitle }}
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" class="modal-close-button" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <!-- <div class="row">
+            @for (job of lstJobInspection; track job; let i=$index) {
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 mb-2">
+                    <img src="{{ APIURL }}/JobInspection/{{job.jobInspectionID}}/{{
+                        job?.image
+                      }}" class="style-image" alt="Image" (click)="open(i)"/>
+                </div>
+                
+                }
+        </div> -->
+    @if(lstJobInspection.length==0){
+    No records found
+    } @else{
+
+    @for (job of lstJobInspection; track job; let key=$index) {
+    <!-- *ngFor="let value of applicantEverifyDoc let key = index" -->
+    <div class="row">
+      <div id="divbutton{{ key }}" style="padding: 15px 0px" class="fa-icons">
+        <span class="fa fa-plus-circle fa-2x" id="plusbtn{{ key }}" (click)="fnZoomOut(key)" title="ZoomIn"></span>
+        <span class="fa fa-minus-circle fa-2x" id="minusbtn{{ key }}" (click)="fnZoomIn(key)" title="ZoomOut"></span>
+        <span class="fa fa-undo fa-2x" id="Resetbtn{{ key }}" (click)="fnZoomReset(key)"
+          title="Reset ZoomIn-ZoomOut"></span>
+        <span class="fa fa-retweet fa-2x" id="Rotatebtn{{ key }}" (click)="fnImgRotate(key)" title="Rotate"></span>
+        <button mat-icon-button class="fa fa-print fa-2x print-btn" id="divimg{{ key }}" ngxPrint
+          title="Print"></button>
+
+        <a class="fa fa-download fa-2x" target="_blank" download title="Download" href="{{ APIURL }}/JobInspectionImage/{{ job.jobInspectionID }}/{{
+            job?.image
+          }}"></a>
+
+        <!-- <span class="fa fa-trash fa-2x pull-right text-danger" id="btn{{ job.jobInspectionDetailId }}"
+          (click)="fnRemoveimg(job.jobInspectionDetailId)"></span> -->
+      </div>
+      <div id="divimg{{ key }}" style="
+          position: relative;
+          margin: 0 10px 10px 0;
+          display: inline-block;
+          width: 100%;
+          min-height: 0px;
+          max-height: 300px;
+          overflow: auto;
+        ">
+        <img id="img{{ key }}" src="{{ APIURL }}/JobInspectionImage/{{ job.jobInspectionID }}/{{
+            job?.image
+          }}" style="width: 500px" />
+      </div>
+    </div>
+    } }
+
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <div class="example-button-row">
+          <!-- <button mat-raised-button color="primary" [disabled]="!customerForm.valid" [mat-dialog-close]="1"
+                  (click)="confirmAdd()">
+                  Save
+                </button> -->
+          <!--   
+                <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">
+                  Cancel
+                </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
